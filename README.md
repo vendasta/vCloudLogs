@@ -14,14 +14,15 @@ work with default google-fluentd in GKE. ioutil.Discard allows particular log le
 6. An endpoint handler to enable/disable Trace/Debug log levels without redeploying your application
 
 ## Installation
-```bash
+```
 $ go get github.com/vendasta/vCloudLogs/difflib
 ```
 
 ## Usage
 ### The logger must be initialized
 This example sets trace and debug as disabled, all other levels as enabled:
-```vCloudLogs.InitLoggers("[TAG]",
+```
+vCloudLogs.InitLoggers("[TAG]",
 		ioutil.Discard, //Trace
 		ioutil.Discard, //Debug
 		os.Stdout,      //Info
@@ -31,10 +32,12 @@ This example sets trace and debug as disabled, all other levels as enabled:
 ```
 
 ### Then call the logger
-```msg := "Oh no, an error happened"
+```
+msg := "Oh no, an error happened"
 vCloudLogs.Errorf("What happened?: %s", msg)
 ```
 
 ### Using the Trace/Debug on/off handler
-```http.HandleFunc("/logging", func(w http.ResponseWriter, r *http.Request) { vCloudLogs.LoggingOnOffHandler(w, r) })
+```
+http.HandleFunc("/logging", func(w http.ResponseWriter, r *http.Request) { vCloudLogs.LoggingOnOffHandler(w, r) })
 ```
