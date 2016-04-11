@@ -15,10 +15,16 @@ work with default google-fluentd in GKE. ioutil.Discard allows particular log le
 
 ## Installation
 ```
-$ go get github.com/vendasta/vCloudLogs/difflib
+$ go get github.com/vendasta/vCloudLogs
 ```
 
 ## Usage
+
+### Import
+```
+import "github.com/vendasta/vCloudLogs"
+```
+
 ### The logger must be initialized
 This example sets trace and debug as disabled, all other levels as enabled:
 ```
