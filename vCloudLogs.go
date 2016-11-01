@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"math"
 	"net/http"
 	"os"
 	"strings"
@@ -82,7 +83,14 @@ func InitLoggers(
 
 func writeLog(logger *log.Logger, format string, v ...interface{}) {
 	const callDepth = 3 // get the file name of calling file.
-	logger.Output(callDepth, fmt.Sprintf(format, v...))
+	const maxLogLen = float64(100 * 1024 - 1)
+	logger.Output(callDepth, truncateString(fmt.Sprintf(format, v...), maxLogLen))
+}
+
+func truncateString(message string, maxLength float64) string {
+	length := float64(len(message))
+	end := int(math.Min(length, maxLength))
+	return message[0:end]
 }
 
 func Trace(v ...interface{}) {
